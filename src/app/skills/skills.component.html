@@ -1,0 +1,94 @@
+<section id="skills" class="py-20 bg-background text-text">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">Technical Skills</h2>
+    <div class="mb-8 text-center">
+      <input type="text" placeholder="Search Skills..." (input)="onSearch($event)" class="w-full max-w-md p-3 rounded bg-secondary border border-gray-600 focus:outline-none focus:border-primary">
+    </div>
+
+    @if (filteredSkills().frontend) {
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-center mb-8">Frontend</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().frontend; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (filteredSkills().backend) {
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-center mb-8">Backend</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().backend; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (filteredSkills().database) {
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-center mb-8">Database</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().database; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (filteredSkills().devops) {
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-center mb-8">DevOps</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().devops; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (filteredSkills().testing) {
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-center mb-8">Testing</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().testing; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (filteredSkills().tools) {
+      <div>
+        <h3 class="text-2xl font-bold text-center mb-8">Tools</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+          @for (skill of filteredSkills().tools; track skill.name) {
+            <div class="p-4 bg-secondary rounded-lg">
+              <img [src]="skill.logo" [alt]="skill.name" class="mx-auto mb-2 h-16">
+              <p>{{ skill.name }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+</section>
+

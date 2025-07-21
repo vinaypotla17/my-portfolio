@@ -1,0 +1,10 @@
+nav a {
+  padding: 0 1rem;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+nav a.active {
+  color: var(--accent-color);
+}

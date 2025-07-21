@@ -1,0 +1,14 @@
+<div class="bg-gray-800 text-white p-4 h-96 flex flex-col">
+  <div class="flex-grow overflow-y-scroll">
+    @for (message of messages; track message) {
+      <div class="mb-4" [ngClass]="{'text-right': message.from === 'user'}">
+        <div class="inline-block p-2 rounded-lg" [ngClass]="{'bg-blue-500': message.from === 'user', 'bg-gray-700': message.from === 'bot'}">
+          <p>{{ message.text }}</p>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="mt-4">
+    <input type="text" class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500" placeholder="Type your message..." #messageInput (keyup.enter)="sendMessage(messageInput)">
+  </div>
+</div>

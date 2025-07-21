@@ -1,0 +1,14 @@
+<section id="interactive-zone" class="py-20 bg-background text-text">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12">Interactive Zone</h2>
+    <div class="flex justify-center mb-8">
+      <button (click)="setTab('terminal')" class="px-4 py-2 rounded-l-lg" [ngClass]="{'bg-primary': activeTab() === 'terminal', 'bg-secondary': activeTab() !== 'terminal'}">Terminal</button>
+      <button (click)="setTab('chat')" class="px-4 py-2 rounded-r-lg" [ngClass]="{'bg-primary': activeTab() === 'chat', 'bg-secondary': activeTab() !== 'chat'}">Chat</button>
+    </div>
+    @if (activeTab() === 'terminal') {
+      <app-terminal></app-terminal>
+    } @else {
+      <app-chat></app-chat>
+    }
+  </div>
+</section>

@@ -1,0 +1,10 @@
+ul:not(.expanded) {
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+ul.expanded {
+  max-height: 1000px; /* A large enough value to show all content */
+  transition: max-height 0.5s ease-in-out;
+}

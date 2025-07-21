@@ -1,0 +1,23 @@
+<header class="bg-secondary text-text p-4 fixed w-full z-50">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">My Portfolio</h1>
+    <nav class="flex items-center">
+      <a href="#hero" (click)="sectionClick.emit('hero')" [class.active]="activeSection === 'hero'">Home</a>
+      <a href="#about" (click)="sectionClick.emit('about')" [class.active]="activeSection === 'about'">About</a>
+      <a href="#experience" (click)="sectionClick.emit('experience')" [class.active]="activeSection === 'experience'">Experience</a>
+      <a href="#projects" (click)="sectionClick.emit('projects')" [class.active]="activeSection === 'projects'">Projects</a>
+      <a href="#skills" (click)="sectionClick.emit('skills')" [class.active]="activeSection === 'skills'">Skills</a>
+      <a href="#education" (click)="sectionClick.emit('education')" [class.active]="activeSection === 'education'">Education</a>
+      <a href="#contact" (click)="sectionClick.emit('contact')" [class.active]="activeSection === 'contact'">Contact</a>
+      <button (click)="toggleTheme()" class="ml-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600">
+        @if (themeService.currentTheme() === 'dark') {
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        } @else {
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.34 19.66l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M4.34 4.34l-.707-.707"></path></svg>
+        }
+      </button>
+    </nav>
+  </div>
+</header>
+
+

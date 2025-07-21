@@ -95,8 +95,18 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/my-portfolio/",
+            "repo": "https://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@github.com/vinaypotla17/my-portfolio.git"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

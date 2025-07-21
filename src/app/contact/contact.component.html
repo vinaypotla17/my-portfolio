@@ -1,0 +1,28 @@
+<section id="contact" class="py-20 bg-background text-text">
+  <div class="container mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-8">Contact Me</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto">
+      <div class="mb-4">
+        <input type="text" formControlName="name" placeholder="Your Name" class="w-full p-3 rounded bg-secondary border border-gray-600 focus:outline-none focus:border-primary">
+      </div>
+      <div class="mb-4">
+        <input type="email" formControlName="email" placeholder="Your Email" class="w-full p-3 rounded bg-secondary border border-gray-600 focus:outline-none focus:border-primary">
+      </div>
+      <div class="mb-4">
+        <textarea formControlName="message" placeholder="Your Message" rows="5" class="w-full p-3 rounded bg-secondary border border-gray-600 focus:outline-none focus:border-primary"></textarea>
+      </div>
+      <button type="submit" [disabled]="contactForm.invalid || formStatus === 'submitting'" class="bg-primary text-white py-3 px-6 rounded-full disabled:bg-gray-500">
+        @if (formStatus === 'idle') { <span>Send Message</span> }
+        @if (formStatus === 'submitting') { <span>Sending...</span> }
+        @if (formStatus === 'success') { <span>Message Sent!</span> }
+        @if (formStatus === 'error') { <span>Error Sending</span> }
+      </button>
+      @if (formStatus === 'success') {
+        <div class="mt-4 text-green-400">Thank you for your message!</div>
+      }
+      @if (formStatus === 'error') {
+        <div class="mt-4 text-red-400">There was an error sending your message. Please try again later.</div>
+      }
+    </form>
+  </div>
+</section>
