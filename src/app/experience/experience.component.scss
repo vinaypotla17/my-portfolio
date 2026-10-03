@@ -1,10 +1,47 @@
-ul:not(.expanded) {
-  max-height: 100px;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+.timeline-line {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-ul.expanded {
-  max-height: 1000px; /* A large enough value to show all content */
-  transition: max-height 0.5s ease-in-out;
+.timeline-entry {
+  width: calc(50% - 2rem);
+  margin-right: auto;
+  text-align: right;
+}
+
+.timeline-entry--right {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: left;
+}
+
+.timeline-card:hover {
+  transform: translateY(-0.25rem);
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  .timeline {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-line {
+    left: 0;
+    transform: none;
+  }
+
+  .timeline-entry,
+  .timeline-entry--right {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
 }

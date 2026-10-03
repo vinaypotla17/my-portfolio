@@ -1,20 +1,26 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output } from '@angular/core';
 
 @Directive({
   selector: '[appSection]',
   standalone: true,
 })
-export class SectionDirective {
+export class SectionDirective implements AfterViewInit, OnDestroy {
   @Output() sectionChange = new EventEmitter<string>();
+  private observer?: IntersectionObserver;
 
   constructor(private el: ElementRef) {}
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const rect = this.el.nativeElement.getBoundingClientRect();
-    // A section is active if its top is within 150px of the top of the viewport.
-    if (rect.top <= 150 && rect.bottom >= 150) {
-      this.sectionChange.emit(this.el.nativeElement.id);
-    }
+  ngAfterViewInit() {
+    this.observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        this.sectionChange.emit(this.el.nativeElement.id);
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    this.observer.observe(this.el.nativeElement);
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
   }
 }

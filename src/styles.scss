@@ -1,5 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
-  scroll-padding-top: 5rem; /* Adjust this value to match your header's height */
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 :root {
@@ -19,8 +24,10 @@ html {
 }
 
 body {
+  margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="text"],

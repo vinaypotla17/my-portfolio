@@ -1,27 +1,27 @@
 <app-header [activeSection]="activeSection()" (sectionClick)="onSectionChange($event)"></app-header>
 <main class="pt-20">
-  <div appSection id="hero" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-hero [@scrollAnimation]="showAnimation"></app-hero>
+  <div appSection id="hero" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('hero')">
+    <app-hero [@scrollAnimation]="animationState('hero')"></app-hero>
   </div>
-  <div appSection id="about" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-about [@scrollAnimation]="showAnimation"></app-about>
+  <div appSection id="about" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('about')">
+    <app-about [@scrollAnimation]="animationState('about')"></app-about>
   </div>
-  <div appSection id="experience" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-experience [@scrollAnimation]="showAnimation"></app-experience>
+  <div appSection id="experience" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('experience')">
+    <app-experience [@scrollAnimation]="animationState('experience')"></app-experience>
   </div>
-  <div appSection id="projects" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-projects [@scrollAnimation]="showAnimation"></app-projects>
+  <div appSection id="projects" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('projects')">
+    <app-projects [@scrollAnimation]="animationState('projects')"></app-projects>
   </div>
-  <div appSection id="skills" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-skills [@scrollAnimation]="showAnimation"></app-skills>
+  <div appSection id="skills" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('skills')">
+    <app-skills [@scrollAnimation]="animationState('skills')"></app-skills>
   </div>
-  <div appSection id="education" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-education [@scrollAnimation]="showAnimation"></app-education>
+  <div appSection id="education" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('education')">
+    <app-education [@scrollAnimation]="animationState('education')"></app-education>
   </div>
-  <div appSection id="interactive-zone" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-interactive-zone [@scrollAnimation]="showAnimation"></app-interactive-zone>
+  <div appSection id="interactive-zone" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('interactive-zone')">
+    <app-interactive-zone [@scrollAnimation]="animationState('interactive-zone')"></app-interactive-zone>
   </div>
-  <div appSection id="contact" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="showAnimation = 'show'">
-    <app-contact [@scrollAnimation]="showAnimation"></app-contact>
+  <div appSection id="contact" (sectionChange)="onSectionChange($event)" appScrollable (scrolled)="onSectionVisible('contact')">
+    <app-contact [@scrollAnimation]="animationState('contact')"></app-contact>
   </div>
 </main>

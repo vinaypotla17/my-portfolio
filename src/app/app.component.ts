@@ -48,12 +48,20 @@ import { InteractiveZoneComponent } from './interactive-zone/interactive-zone.co
 })
 export class AppComponent {
   title = 'portfolio';
-  showAnimation = 'hide';
   activeSection = signal('hero');
+  visibleSections = signal(new Set(['hero']));
 
   themeService = inject(ThemeService);
 
   onSectionChange(section: string) {
     this.activeSection.set(section);
+  }
+
+  onSectionVisible(section: string) {
+    this.visibleSections.update(sections => new Set(sections).add(section));
+  }
+
+  animationState(section: string) {
+    return this.visibleSections().has(section) ? 'show' : 'hide';
   }
 }

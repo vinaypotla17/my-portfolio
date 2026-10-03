@@ -1,15 +1,24 @@
-<header class="bg-secondary text-text p-4 fixed w-full z-50">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold">My Portfolio</h1>
-    <nav class="flex items-center">
-      <a href="#hero" (click)="sectionClick.emit('hero')" [class.active]="activeSection === 'hero'">Home</a>
-      <a href="#about" (click)="sectionClick.emit('about')" [class.active]="activeSection === 'about'">About</a>
-      <a href="#experience" (click)="sectionClick.emit('experience')" [class.active]="activeSection === 'experience'">Experience</a>
-      <a href="#projects" (click)="sectionClick.emit('projects')" [class.active]="activeSection === 'projects'">Projects</a>
-      <a href="#skills" (click)="sectionClick.emit('skills')" [class.active]="activeSection === 'skills'">Skills</a>
-      <a href="#education" (click)="sectionClick.emit('education')" [class.active]="activeSection === 'education'">Education</a>
-      <a href="#contact" (click)="sectionClick.emit('contact')" [class.active]="activeSection === 'contact'">Contact</a>
-      <button (click)="toggleTheme()" class="ml-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600">
+<header class="p-4 fixed w-full z-50">
+  <div class="container mx-auto flex justify-between items-center gap-4">
+    <h1 class="text-2xl font-bold whitespace-nowrap">My Portfolio</h1>
+    <button
+      type="button"
+      class="menu-button p-2 rounded md:hidden"
+      aria-label="Toggle navigation"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-navigation"
+      (click)="toggleMenu()">
+      <span aria-hidden="true">{{ menuOpen() ? '✕' : '☰' }}</span>
+    </button>
+    <nav id="primary-navigation" class="items-center" [class.open]="menuOpen()" aria-label="Primary navigation">
+      <a href="#hero" (click)="selectSection('hero')" [class.active]="activeSection === 'hero'">Home</a>
+      <a href="#about" (click)="selectSection('about')" [class.active]="activeSection === 'about'">About</a>
+      <a href="#experience" (click)="selectSection('experience')" [class.active]="activeSection === 'experience'">Experience</a>
+      <a href="#projects" (click)="selectSection('projects')" [class.active]="activeSection === 'projects'">Projects</a>
+      <a href="#skills" (click)="selectSection('skills')" [class.active]="activeSection === 'skills'">Skills</a>
+      <a href="#education" (click)="selectSection('education')" [class.active]="activeSection === 'education'">Education</a>
+      <a href="#contact" (click)="selectSection('contact')" [class.active]="activeSection === 'contact'">Contact</a>
+      <button type="button" (click)="toggleTheme()" class="theme-button p-2 rounded-full bg-gray-700 hover:bg-gray-600" aria-label="Toggle color theme">
         @if (themeService.currentTheme() === 'dark') {
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
         } @else {
@@ -19,5 +28,3 @@
     </nav>
   </div>
 </header>
-
-

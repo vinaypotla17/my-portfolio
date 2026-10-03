@@ -14,10 +14,17 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('activeSection', 'hero');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should toggle the mobile menu', () => {
+    expect(component.menuOpen()).toBeFalse();
+    component.toggleMenu();
+    expect(component.menuOpen()).toBeTrue();
   });
 });

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PortfolioDataService } from '../portfolio-data.service';
 
 @Component({
   selector: 'app-about',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
-
+  private portfolioDataService = inject(PortfolioDataService);
+  heroData = this.portfolioDataService.heroData;
 }

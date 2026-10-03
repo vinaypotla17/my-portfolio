@@ -1,4 +1,4 @@
-<div class="bg-black text-white font-mono p-4 h-96 overflow-y-scroll">
+<div class="bg-black text-white font-mono p-4 h-96 overflow-y-scroll" role="region" aria-label="Interactive portfolio terminal">
   @for (line of lines; track line) {
     <div>
       @if (line.type === 'input') {
@@ -9,7 +9,8 @@
     </div>
   }
   <div class="flex">
-    <span class="text-green-400">> </span>
-    <input type="text" class="bg-black text-white w-full outline-none" (keydown)="onKeydown($event)" autofocus>
+    <span class="text-green-400" aria-hidden="true">>&nbsp;</span>
+    <label for="terminal-command" class="sr-only">Terminal command</label>
+    <input id="terminal-command" type="text" class="bg-black text-white w-full outline-none" (keydown)="onKeydown($event)" autocomplete="off" spellcheck="false">
   </div>
 </div>

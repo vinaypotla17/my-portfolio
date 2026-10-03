@@ -39,11 +39,16 @@ export class TerminalComponent {
   }
 
   handleCommand(command: string) {
-    this.lines.push({ type: 'input', content: command });
-    this.commandHistory.push(command);
+    const normalizedCommand = command.trim();
+    if (!normalizedCommand) {
+      return;
+    }
+
+    this.lines.push({ type: 'input', content: normalizedCommand });
+    this.commandHistory.push(normalizedCommand);
     this.commandHistoryIndex = this.commandHistory.length;
 
-    const [cmd, ...args] = command.split(' ');
+    const [cmd, ...args] = normalizedCommand.toLowerCase().split(/\s+/);
 
     switch (cmd) {
       case 'help':
@@ -54,15 +59,12 @@ export class TerminalComponent {
         break;
       case 'skills':
         const skills = this.portfolioDataService.skillsData();
-        let skillsOutput = '';
-        for (const key in skills) {
-          if (Object.prototype.hasOwnProperty.call(skills, key)) {
-            skillsOutput += `\n${key.toUpperCase()}:\n`;
-            (skills as any)[key].forEach((skill: any) => {
-              skillsOutput += `  - ${skill.name}\n`;
-            });
-          } 
-        }
+        const skillsOutput = Object.entries(skills)
+          .map(([category, items]) => {
+            const names = items.map(skill => `  - ${skill.name}`).join('\n');
+            return `\n${category.toUpperCase()}:\n${names}`;
+          })
+          .join('\n');
         this.lines.push({ type: 'output', content: skillsOutput });
         break;
       case 'cat':
@@ -84,6 +86,9 @@ export class TerminalComponent {
           this.portfolioDataService.projectsData().forEach(project => {
             projectsOutput += `\n## ${project.name}\n`;
             projectsOutput += `${project.description}\n`;
+            if (project.technologies.length) {
+              projectsOutput += `Tech: ${project.technologies.join(', ')}\n`;
+            }
           });
           this.lines.push({ type: 'output', content: projectsOutput });
         } else {
@@ -91,7 +96,7 @@ export class TerminalComponent {
         }
         break;
       default:
-        this.lines.push({ type: 'output', content: `command not found: ${command}` });
+        this.lines.push({ type: 'output', content: `command not found: ${normalizedCommand}` });
         break;
     }
   }

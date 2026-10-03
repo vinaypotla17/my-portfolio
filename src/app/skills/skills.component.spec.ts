@@ -20,4 +20,13 @@ describe('SkillsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should filter skills by name', () => {
+    component.onSearch({ target: { value: 'Angular' } } as unknown as Event);
+
+    expect(component.filteredSkills()['frontend']).toEqual([
+      jasmine.objectContaining({ name: 'Angular' })
+    ]);
+    expect(component.filteredSkills()['backend']).toBeUndefined();
+  });
 });

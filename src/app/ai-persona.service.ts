@@ -1,12 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { PortfolioDataService } from './portfolio-data.service';
+import { PortfolioDataService, Skill } from './portfolio-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AiPersonaService {
   private portfolioData = inject(PortfolioDataService);
-  private context: { topic: string | null, subject: any | null } = { topic: null, subject: null };
+  private context: { topic: string | null; subject: unknown } = { topic: null, subject: null };
 
   getResponse(message: string): string {
     const lowerCaseMessage = message.toLowerCase();
@@ -18,6 +18,10 @@ export class AiPersonaService {
 
     if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
       return 'Hello there! How can I tell you more about my work?';
+    }
+
+    if (lowerCaseMessage.includes('about') || lowerCaseMessage.includes('who are you')) {
+      return this.portfolioData.heroData().summary;
     }
 
     // More complex intent detection
@@ -56,10 +60,9 @@ export class AiPersonaService {
 
   private generateSkillResponse(message: string): string {
     const skills = this.portfolioData.skillsData();
-    const allSkills: {name: string, category: string}[] = [];
-    Object.keys(skills).forEach(key => {
-      (skills as any)[key].forEach((skill: any) => allSkills.push({ name: skill.name, category: key }));
-    });
+    const allSkills = Object.entries(skills).flatMap(([category, items]) =>
+      items.map((skill: Skill) => ({ name: skill.name, category }))
+    );
 
     const mentionedSkills = allSkills.filter(skill => message.includes(skill.name.toLowerCase()));
 
@@ -69,7 +72,9 @@ export class AiPersonaService {
       return `I'm glad you asked about ${skillNames}. I have used these in several of my projects. For example, in my work at Epsilon, I heavily used Angular and TypeScript to build a modern messaging platform.`;
     }
 
-    return 'I have a wide range of skills across the full stack. Are you interested in my frontend, backend, or DevOps skills?';
+    return Object.entries(skills)
+      .map(([category, items]) => `${category.toUpperCase()}: ${items.map(skill => skill.name).join(', ')}`)
+      .join('\n');
   }
 
   private generateExperienceResponse(message: string): string {
@@ -82,7 +87,9 @@ export class AiPersonaService {
       return `At ${job.company}, my role as a ${job.role} was really rewarding. One of my key achievements was ${job.responsibilities[0]}. I can tell you more if you'd like.`;
     }
 
-    return 'I have had some great experiences at companies like Epsilon and Hoonuit, where I was able to contribute to some exciting projects. Which role would you like to hear about?';
+    return experience
+      .map(job => `${job.role} at ${job.company} (${job.period})`)
+      .join('\n');
   }
 
   private generateProjectResponse(message: string): string {
@@ -95,7 +102,9 @@ export class AiPersonaService {
       return `The ${project.name} project was a great learning experience. ${project.description} Would you like to know more about the tech I used?`;
     }
 
-    return 'I have worked on a few interesting projects, including a real-time spam detector and a predictive analytics engine. Which one piques your interest?';
+    return projects
+      .map(project => `${project.name}: ${project.description}`)
+      .join('\n');
   }
 
   private generateEducationResponse(): string {
@@ -106,10 +115,18 @@ export class AiPersonaService {
 
   private generateFollowUpResponse(): string {
     if (this.context.topic === 'experience') {
-      const job = this.context.subject;
+      const job = this.context.subject as { company: string; responsibilities: string[] };
       return `Of course. While at ${job.company}, another thing I worked on was ${job.responsibilities[1]}. It was a challenging but rewarding task.`;
     }
-    // Add more follow-up logic for other topics here
+
+    if (this.context.topic === 'projects') {
+      const project = this.context.subject as { name: string; technologies?: string[] };
+      const technologies = project.technologies?.join(', ');
+      return technologies
+        ? `${project.name} uses ${technologies}.`
+        : `I can share more about ${project.name} if you ask about a specific part of it.`;
+    }
+
     return 'Could you be more specific? I can tell you more about my skills, experience, or projects.';
   }
 }

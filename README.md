@@ -1,59 +1,49 @@
-# Portfolio
+# Vinay Potla — Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+A responsive Angular portfolio presenting professional experience, projects,
+technical skills, education, and contact information. Visitors can also explore
+the portfolio through an interactive terminal and a résumé chatbot.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Responsive single-page layout with active-section navigation
+- Persistent light and dark themes
+- Searchable technical skills
+- Expandable professional timeline
+- Interactive terminal and portfolio chatbot
+- Validated contact form powered by Formspree
+- Accessible labels, status messages, and keyboard-friendly controls
 
-```bash
-ng serve
-```
+## Technology
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular standalone components and signals
+- TypeScript, SCSS, and Tailwind CSS
+- Angular reactive forms, HTTP client, and animations
+- Jasmine and Karma unit tests
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Local development
 
 ```bash
-ng build
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Open <http://localhost:4200>.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Validation
 
 ```bash
-ng test
+npm test -- --watch=false --browsers=ChromeHeadless
+npm run build
 ```
 
-## Running end-to-end tests
+## Deployment
 
-For end-to-end (e2e) testing, run:
+The project includes an `angular-cli-ghpages` deployment target:
 
 ```bash
-ng e2e
+npx ng deploy
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Authenticate through your local Git credential manager or CI secrets. Never
+store access tokens in repository URLs or committed configuration.
