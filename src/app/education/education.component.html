@@ -5,7 +5,7 @@
       @for (edu of education(); track edu.university) {
         <article class="education-card p-6 bg-background rounded-lg text-center shadow-lg">
           <div class="logo-plate">
-            <img [src]="edu.logo" [alt]="edu.university + ' logo'">
+            <img [src]="edu.logo" [alt]="edu.university + ' logo'" width="240" height="96" loading="lazy" decoding="async">
           </div>
           <h3 class="text-2xl font-bold mb-2">{{ edu.university }}</h3>
           <p class="text-lg mb-1">{{ edu.degree }}</p>

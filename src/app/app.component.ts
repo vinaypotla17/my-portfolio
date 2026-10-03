@@ -52,6 +52,7 @@ export class AppComponent {
   visibleSections = signal(new Set(['hero']));
 
   themeService = inject(ThemeService);
+  private readonly reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   onSectionChange(section: string) {
     this.activeSection.set(section);
@@ -62,6 +63,9 @@ export class AppComponent {
   }
 
   animationState(section: string) {
+    if (this.reduceMotion) {
+      return 'show';
+    }
     return this.visibleSections().has(section) ? 'show' : 'hide';
   }
 }

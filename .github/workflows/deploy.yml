@@ -1,0 +1,39 @@
+name: Test and deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+        env:
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
+
+      - name: Deploy to GitHub Pages
+        run: npx ng deploy --name=github-actions --email=github-actions@github.com
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

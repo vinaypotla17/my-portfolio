@@ -29,4 +29,21 @@ describe('SkillsComponent', () => {
     ]);
     expect(component.filteredSkills()['backend']).toBeUndefined();
   });
+
+  it('keeps secondary skill categories collapsed until expanded', () => {
+    expect(component.visibleSkillCategories().map(category => category.key))
+      .toEqual(['cloud', 'backend', 'frontend', 'messaging']);
+
+    component.showAllSkills.set(true);
+
+    expect(component.visibleSkillCategories().map(category => category.key))
+      .toContain('testing');
+  });
+
+  it('reveals matching skills from collapsed categories while searching', () => {
+    component.onSearch({ target: { value: 'Cypress' } } as unknown as Event);
+
+    expect(component.visibleSkillCategories().map(category => category.key))
+      .toEqual(['testing']);
+  });
 });

@@ -47,3 +47,5 @@ npx ng deploy
 
 Authenticate through your local Git credential manager or CI secrets. Never
 store access tokens in repository URLs or committed configuration.
+
+Pushes to `main` also run the tests and publish the site through GitHub Actions.

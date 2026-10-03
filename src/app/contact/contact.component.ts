@@ -21,10 +21,37 @@ export class ContactComponent {
   });
 
   formStatus: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
+  submitted = false;
+
+  constructor() {
+    this.contactForm.valueChanges.subscribe(() => {
+      if (this.formStatus === 'error') {
+        this.formStatus = 'idle';
+      }
+    });
+  }
+
+  fieldError(controlName: 'name' | 'email' | 'message'): string | null {
+    const control = this.contactForm.controls[controlName];
+    if (!this.submitted && !control.touched) {
+      return null;
+    }
+    if (control.hasError('required')) {
+      if (controlName === 'name') return 'Enter your name.';
+      if (controlName === 'email') return 'Enter your email address.';
+      return 'Enter a message.';
+    }
+    if (control.hasError('email')) return 'Enter a valid email address.';
+    if (control.hasError('maxlength')) return 'That entry is too long.';
+    return null;
+  }
 
   onSubmit() {
+    this.submitted = true;
+
     if (this.contactForm.controls._gotcha.value) {
       this.formStatus = 'success';
+      this.submitted = false;
       this.contactForm.reset();
       return;
     }
@@ -38,6 +65,7 @@ export class ContactComponent {
       .subscribe({
         next: () => {
           this.formStatus = 'success';
+          this.submitted = false;
           this.contactForm.reset();
         },
         error: () => {

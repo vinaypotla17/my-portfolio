@@ -5,3 +5,17 @@
   height: 1px;
   overflow: hidden;
 }
+
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.field-error {
+  margin: 0.35rem 0 0;
+  text-align: left;
+  color: #f87171;
+  font-size: 0.875rem;
+}

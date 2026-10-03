@@ -5,3 +5,41 @@
   gap: 0.5rem;
   overflow-wrap: anywhere;
 }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero-action:hover,
+.hero-action:focus-visible {
+  background: var(--secondary-color);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.hero-action--primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.hero-action--primary:hover,
+.hero-action--primary:focus-visible {
+  filter: brightness(1.08);
+}

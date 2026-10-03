@@ -22,7 +22,22 @@ nav a.active {
 }
 
 .theme-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-left: 1rem;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.theme-button:hover {
+  background-color: var(--background-color);
 }
 
 .menu-button {

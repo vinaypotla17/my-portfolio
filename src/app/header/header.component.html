@@ -18,11 +18,20 @@
       <a href="#skills" (click)="selectSection('skills')" [class.active]="activeSection === 'skills'">Skills</a>
       <a href="#education" (click)="selectSection('education')" [class.active]="activeSection === 'education'">Education</a>
       <a href="#contact" (click)="selectSection('contact')" [class.active]="activeSection === 'contact'">Contact</a>
-      <button type="button" (click)="toggleTheme()" class="theme-button p-2 rounded-full bg-gray-700 hover:bg-gray-600" aria-label="Toggle color theme">
+      <button
+        type="button"
+        (click)="toggleTheme()"
+        class="theme-button"
+        [attr.aria-label]="themeService.currentTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'">
         @if (themeService.currentTheme() === 'dark') {
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"></path>
+          </svg>
         } @else {
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v1m0 16v1m8.66-15.66l-.707.707M4.34 19.66l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M4.34 4.34l-.707-.707"></path></svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+          </svg>
         }
       </button>
     </nav>

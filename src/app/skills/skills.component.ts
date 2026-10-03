@@ -12,6 +12,8 @@ export class SkillsComponent {
   skills = this.portfolioDataService.skillsData;
 
   searchTerm = signal('');
+  showAllSkills = signal(false);
+  private readonly leadCategoryKeys = new Set(['cloud', 'backend', 'frontend', 'messaging']);
 
   filteredSkills = computed(() => {
     const term = this.searchTerm().toLowerCase();
@@ -65,6 +67,14 @@ export class SkillsComponent {
       label: this.categoryLabels[key] ?? key,
       skills: filtered[key]
     }));
+  });
+
+  visibleSkillCategories = computed(() => {
+    const categories = this.skillCategories();
+    if (this.showAllSkills() || this.searchTerm().trim()) {
+      return categories;
+    }
+    return categories.filter(category => this.leadCategoryKeys.has(category.key));
   });
 
   onSearch(event: Event) {

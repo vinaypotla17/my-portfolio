@@ -54,4 +54,32 @@ describe('ContactComponent', () => {
     httpTesting.expectNone('https://formspree.io/f/mqalappo');
     expect(component.formStatus).toBe('success');
   });
+
+  it('shows validation instead of sending an incomplete form', () => {
+    component.onSubmit();
+
+    httpTesting.expectNone('https://formspree.io/f/mqalappo');
+    expect(component.submitted).toBeTrue();
+    expect(component.fieldError('name')).toBe('Enter your name.');
+    expect(component.fieldError('email')).toBe('Enter your email address.');
+    expect(component.fieldError('message')).toBe('Enter a message.');
+  });
+
+  it('lets the visitor retry after a send error', () => {
+    component.contactForm.setValue({
+      name: 'Test User',
+      email: 'test@example.com',
+      message: 'Hello',
+      _gotcha: ''
+    });
+
+    component.onSubmit();
+    httpTesting.expectOne('https://formspree.io/f/mqalappo')
+      .flush('nope', { status: 500, statusText: 'Server Error' });
+    expect(component.formStatus).toBe('error');
+
+    component.onSubmit();
+    httpTesting.expectOne('https://formspree.io/f/mqalappo').flush({});
+    expect(component.formStatus).toBe('success');
+  });
 });

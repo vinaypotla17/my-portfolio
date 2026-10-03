@@ -6,19 +6,27 @@
       <input id="skill-search" type="search" placeholder="Search Skills..." (input)="onSearch($event)" class="w-full max-w-md p-3 rounded bg-secondary border border-gray-600 focus:outline-none focus:border-primary">
     </div>
 
-    @for (category of skillCategories(); track category.key) {
+    @for (category of visibleSkillCategories(); track category.key) {
       <div class="mb-12">
         <h3 class="text-2xl font-bold text-center mb-8">{{ category.label }}</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
           @for (skill of category.skills; track skill.name) {
             <div class="p-4 bg-secondary rounded-lg">
               <div class="logo-plate">
-                <img [src]="skill.logo" [alt]="skill.name">
+                <img [src]="skill.logo" [alt]="skill.name" width="64" height="64" loading="lazy" decoding="async">
               </div>
               <p>{{ skill.name }}</p>
             </div>
           }
         </div>
+      </div>
+    }
+
+    @if (!searchTerm().trim()) {
+      <div class="text-center">
+        <button type="button" class="skills-toggle" (click)="showAllSkills.set(!showAllSkills())">
+          {{ showAllSkills() ? 'Show fewer skills' : 'Show all skills' }}
+        </button>
       </div>
     }
   </div>
